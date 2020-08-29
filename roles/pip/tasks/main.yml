@@ -1,19 +1,21 @@
 ---
 - name: install epel-release
-  yum: 
+  yum:
     update_cache: yes
     name: epel-release
     enablerepo: extras
-    state: installed 
+    state: installed
 
 - name: install pip
-  yum: 
+  yum:
     update_cache: yes
     name: python-pip
     state: installed
 
-- name: update pip 
-  shell: pip install --upgrade pip
+- name: update pip
+  pip:
+    name: pip
+    state: latest
 
 - name: install selinux
   pip:
