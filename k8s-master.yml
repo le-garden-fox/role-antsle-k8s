@@ -3,4 +3,5 @@
   become: yes
   roles:
     - pip
+    - docker
     - k8s-master

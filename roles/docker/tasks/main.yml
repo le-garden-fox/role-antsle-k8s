@@ -1,0 +1,22 @@
+---
+- name: add docker-ce.repo
+  copy:
+    src: docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+    force: yes
+
+- name: docker packages
+  yum:
+    name: "{{ packages }}"
+    update_cache: yes
+    state: latest
+  vars:
+    packages:
+    - yum-utils
+    - device-mapper-persistent-data 
+    - lvm2 
+    - docker-ce 
+    - docker-ce-cli 
+    - containerd.io
+
+- include: swap.yml

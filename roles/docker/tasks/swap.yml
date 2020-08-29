@@ -1,0 +1,11 @@
+---
+#https://germaniumhq.com/2019/02/14/2019-02-14-Disabling-Swap-for-Kubernetes-in-an-Ansible-Playbook/
+- name: swapoff
+  shell: |
+    swapoff -a
+
+- name: fstab swapoff
+  replace:
+    path: /etc/fstab
+    regexp: '^([^#].*?\sswap\s+sw\s+.*)$'
+    replace: '# \1'
