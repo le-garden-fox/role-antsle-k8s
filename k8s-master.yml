@@ -1,5 +1,5 @@
 - name: k8s-master
   hosts: all
-  become: True
+  become: yes
   roles:
     - k8s-master
