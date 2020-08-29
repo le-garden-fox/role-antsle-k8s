@@ -1,0 +1,3 @@
+---
+- name: initial
+  shell: echo "Hello world"
