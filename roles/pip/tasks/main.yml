@@ -20,3 +20,4 @@
 - name: install selinux
   pip:
     name: selinux
+    state: latest

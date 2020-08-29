@@ -3,4 +3,15 @@
   copy:
     src: kubernetes.repo
     dest: /etc/yum.repos.d/kubernetes.repo
-  become_user: root
+    force: yes
+
+- name: install kubeadmn
+  yum:
+    name: "{{ packages }}"
+    update_cache: yes
+    state: latest
+  vars:
+    packages:
+    - kubelet 
+    - kubeadm 
+    - kubectl
