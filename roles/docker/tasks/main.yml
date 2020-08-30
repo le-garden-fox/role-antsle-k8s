@@ -15,8 +15,38 @@
     - yum-utils
     - device-mapper-persistent-data 
     - lvm2 
-    - docker-ce 
-    - docker-ce-cli 
-    - containerd.io
+    - docker-ce-19.03.11 
+    - docker-ce-cli-19.03.11
+    - containerd.io-1.2.13
+
 
 - include: swap.yml
+
+- name: create service file for docker 
+  file:
+    path: /etc/systemd/system/docker.service.d
+    state: directory
+
+- name: enable docker service
+  service:
+    name: docker
+    enabled: yes
+
+- name: start docker service
+  service:
+    name: docker
+    state: started
+
+- name: docker config
+  copy: 
+    src: daemon.json
+    dest: /etc/docker/daemon.json
+
+- name: start restart
+  service:
+    name: docker
+    state: reloaded
+
+#- name: add admin to docker group
+#  shell: |
+#    usermod -aG docker admin

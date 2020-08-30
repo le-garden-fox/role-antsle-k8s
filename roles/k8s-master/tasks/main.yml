@@ -15,3 +15,15 @@
     - kubelet 
     - kubeadm 
     - kubectl
+
+
+
+- name: enable kubelet service
+  service:
+    name: kubelet
+    enabled: yes
+
+- name: start kubelet service
+  service:
+    name: kubelet
+    state: started
