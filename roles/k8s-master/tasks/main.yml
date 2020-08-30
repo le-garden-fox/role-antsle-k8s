@@ -5,7 +5,7 @@
     dest: /etc/yum.repos.d/kubernetes.repo
     force: yes
 
-- name: install kubeadmn
+- name: install kubeadm
   yum:
     name: "{{ packages }}"
     update_cache: yes
@@ -16,8 +16,6 @@
     - kubeadm 
     - kubectl
 
-
-
 - name: enable kubelet service
   service:
     name: kubelet
@@ -27,3 +25,44 @@
   service:
     name: kubelet
     state: started
+
+- name: kernel settings 1
+  sysctl:
+    name: net.bridge.bridge-nf-call-ip6tables
+    value: '1'
+    sysctl_file: /etc/sysctl.d/00-system.conf
+    sysctl_set: yes
+    state: present
+    reload: yes
+
+- name: kernel settings 2
+  sysctl:
+    name: net.bridge.bridge-nf-call-iptables
+    value: '1'
+    sysctl_file: /etc/sysctl.d/00-system.conf
+    sysctl_set: yes
+    state: present
+    reload: yes
+
+- name: kernel settings 3
+  sysctl:
+    name: net.bridge.bridge-nf-call-arptables
+    value: '1'
+    sysctl_file: /etc/sysctl.d/00-system.conf
+    sysctl_set: yes
+    state: present
+    reload: yes
+
+- name: kernel settings 4
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: '1'
+    sysctl_file: /etc/sysctl.d/00-system.conf
+    sysctl_set: yes
+    state: present
+    reload: yes
+
+#- name: update net.bridge kernel settings 
+#  copy:
+#    src: 00-system.conf
+#    dest: /usr/lib/sysctl.d/00-system.conf
