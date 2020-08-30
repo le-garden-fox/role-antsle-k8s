@@ -1,0 +1,8 @@
+- name: k8s-master
+  hosts: all
+  become: yes
+  roles:
+    - shared
+    - pip
+    - docker
+    - k8s-master

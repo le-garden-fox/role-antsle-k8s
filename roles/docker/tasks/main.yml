@@ -21,6 +21,7 @@
 
 
 - include: swap.yml
+- include: disk-mount.yml
 
 - name: create service file for docker 
   file:
