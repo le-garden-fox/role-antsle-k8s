@@ -1,6 +1,3 @@
 --- 
-- name: install vim
-  yum:
-    name: vim
-    state: latest
-    update_cache: yes
+- include: vim.yml
+#- include: helm.yml

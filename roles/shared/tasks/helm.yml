@@ -1,0 +1,12 @@
+--- 
+- name: install wget 
+- name: install helm
+  unarchive:
+    src: https://get.helm.sh/helm-v3.3.1-linux-amd64.tar.gz
+    dest: /tmp/helm
+    remote_src: yes
+
+- name: move helm 
+  file: 
+    path: linux-amd64/helm
+    #    dest: /usr/local/bin/helm 

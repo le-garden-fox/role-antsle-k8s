@@ -1,0 +1,12 @@
+--- 
+- name: install vim
+  yum:
+    name: vim
+    state: latest
+    update_cache: yes
+
+- name: install wget
+  yum:
+    name: wget
+    state: latest
+    update_cache: yes
