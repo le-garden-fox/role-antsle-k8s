@@ -8,8 +8,8 @@ case $1 in
         ansible-playbook -i 10.1.1.15, -u admin -vvv "${@:2}" k8s-master.yml
     ;;
     
-    "k8s-node")
-        ansible-playbook -i 10.1.1.11, -u admin -vvv "${@:2}" k8s-master.yml
+    "gitlab-master")
+        ansible-playbook -i 10.1.1.17, -u admin -vvv "${@:2}" gitlab-master.yml
     ;;
     
     *)

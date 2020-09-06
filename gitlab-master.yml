@@ -1,8 +1,7 @@
-- name: k8s-master
+- name: gitlab master
   hosts: all
   become: yes
   roles:
     - shared
     - pip
-    - docker
-    - k8s-master
+    - gitlab

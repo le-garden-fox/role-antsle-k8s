@@ -1,0 +1,68 @@
+---
+- name: install gitlab dependencies
+  yum:
+    name: "{{ packages }}"
+    update_cache: yes
+    state: latest
+  vars:
+    packages:
+    - curl
+    - policycoreutils-python 
+    - openssh-server
+    - firewalld
+
+- name: enable sshd service
+  service:
+    name: sshd
+    enabled: yes
+
+- name: start sshd service
+  service:
+    name: sshd
+    state: started
+
+- name: https firewall
+  firewalld:
+    service: https
+    permanent: yes
+    state: enabled
+
+- name: http firewall
+  firewalld:
+    service: http
+    permanent: yes
+    state: enabled
+
+- name: install postfix
+  yum:
+    name: postfix
+    update_cache: yes
+    state: latest
+
+- name: enable postfix service
+  service:
+    name: postfix
+    enabled: yes
+
+- name: start postfix service
+  service:
+    name: postfix
+    state: started
+
+
+- name: copy scripts.rpm.sh file
+  copy:
+    src: scripts.rpm.sh
+    dest: /tmp/scripts.rpm.sh
+    mode: 0755
+
+- name: run scripts.rpm.sh  
+  shell: /tmp/scripts.rpm.sh
+  become: true
+
+- name: install gitlab
+  yum:
+    name: gitlab-ee
+    update_cache: yes
+  env:
+    EXTERNAL_URL: "https://gitlab.example.com"

@@ -1,0 +1,16 @@
+--- 
+- name: install rsyslog
+  yum:
+    name: rsyslog
+    state: latest
+    update_cache: yes
+
+- name: enable rsyslog service
+  service:
+    name: rsyslog
+    enabled: yes
+
+- name: start rsyslog service
+  service:
+    name: rsyslog
+    state: started
