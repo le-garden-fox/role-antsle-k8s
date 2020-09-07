@@ -1,0 +1,37 @@
+---
+- name: stat protoc3
+  stat: 
+    path: /usr/local/bin/protoc
+  register: protoc3
+
+- name: install protoc3
+  unarchive: 
+    src: https://github.com/google/protobuf/releases/download/v3.5.1/protoc-3.5.1-linux-x86_64.zip
+    dest: /tmp/
+    remote_src: yes
+  when: protoc3.stat.exists == False
+
+- name: move protoc3
+  shell: mv /tmp/protoc3/bin/* /usr/local/bin/
+  when: protoc3.stat.exists == False
+
+- name: move protoc3 includes
+  shell: mv /tmp/protoc3/include/* /usr/local/include/ 
+  when: protoc3.stat.exists == False
+
+- name: permissions /usr/local/bin/protoc
+  file:
+    path: /usr/local/bin/protoc
+    owner: admin
+    group: admin
+    mode: 0755
+  when: protoc3.stat.exists == False
+
+- name: permissions /usr/local/include/google
+  file:
+    path: /usr/local/include/google
+    owner: admin
+    group: admin
+    mode: 0755
+    recurse: yes
+  when: protoc3.stat.exists == False
